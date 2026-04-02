@@ -1,13 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projekt #2</title>
-    <link rel="stylesheet" type="text/css" href="/style.css?<%=Time.now.to_i%>">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projekt #2</title>
+  <link rel="stylesheet" type="text/css" href="/style.css?<%= Time.now.to_i %>">
 </head>
 <body>
-  <h1>Webbserverprogrammering 1 - Slutprojekt</h1>
-  <img src="/img/glhf.png">
+
+<h2>Tillgängliga kakor</h2>
+<ul>
+  <% @unfinished.each do |todo| %>
+    <li class="todo-item">
+      <a href="/todos/<%= todo['id'] %>">
+        <span class="todo-name"><%= todo["name"] %></span><br>
+        <span class="todo-description"><%= todo["description"] %></span>
+      </a>
+
+      <form action="/todos/<%= todo['id'] %>/down" method="post">
+        <button type="submit">Down</button>
+      </form>
+
+      <form action="/todos/<%= todo['id'] %>/delete" method="post">
+        <button type="submit">Delete</button>
+      </form>
+
+      <form action="/todos/<%= todo['id'] %>/edit" method="get">
+        <button type="submit">Edit</button>
+      </form>
+    </li>
+  <% end %>
+</ul>
+
 </body>
 </html>

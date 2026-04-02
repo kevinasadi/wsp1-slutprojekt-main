@@ -1,23 +1,22 @@
 require 'debug'
-require "awesome_print"
+require 'awesome_print'
 
 class App < Sinatra::Base
+  def db
+    return @db if @db
 
-    setup_development_features(self)
+    @db = SQLite3::Database.new(DB_PATH)
+    @db.results_as_hash = true
+    @db
+  end
 
-    # Funktion för att prata med databasen
-    # Exempel på användning: db.execute('SELECT * FROM fruits')
-    def db
-      return @db if @db
-      @db = SQLite3::Database.new(DB_PATH)
-      @db.results_as_hash = true
+  get '/' do
+    @cookies = db.execute("SELECT * FROM cookies")
+    erb(:"index")
+  end
 
-      return @db
-    end
-
-    # Routen /
-    get '/' do
-        erb :index
-    end
-
+  get '/cookies/:id' do |id|
+    @cookie = db.execute("SELECT * FROM cookies WHERE id = ?", [id]).first
+    erb(:"cookie")
+  end
 end
