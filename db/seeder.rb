@@ -33,6 +33,7 @@ class Seeder
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         flavor TEXT NOT NULL,
         description TEXT NOT NULL,
+        image TEXT NOT NULL,
         price INTEGER NOT NULL
       );
     SQL
@@ -59,9 +60,9 @@ class Seeder
   end
 
   def self.populate_tables
-    db.execute("INSERT INTO cookies (flavor, description, price) VALUES ('Choklad', 'Vår klassiska smak!', 25)")
-    db.execute("INSERT INTO cookies (flavor, description, price) VALUES ('Pepparkaka', 'Julspecial!', 25)")
-    db.execute("INSERT INTO cookies (flavor, description, price) VALUES ('Salted Caramel', 'Söt men saltig kaka.', 30)")
+    db.execute("INSERT INTO cookies (flavor, description, image, price) VALUES ('Choklad', 'chocochip', 'Vår klassiska smak!', 25)")
+    db.execute("INSERT INTO cookies (flavor, description, image, price) VALUES ('Pepparkaka', 'gingerbread', 'Julspecial!', 25)")
+    db.execute("INSERT INTO cookies (flavor, description, image, price) VALUES ('Salted Caramel', 'saltedcaramel' 'Söt men saltig kaka.', 30)")
 
   end
 

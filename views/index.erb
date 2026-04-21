@@ -8,29 +8,25 @@
 </head>
 <body>
 
-<h2>Tillgängliga kakor</h2>
-<ul>
-  <% @unfinished.each do |todo| %>
-    <li class="todo-item">
-      <a href="/todos/<%= todo['id'] %>">
-        <span class="todo-name"><%= todo["name"] %></span><br>
-        <span class="todo-description"><%= todo["description"] %></span>
+<a href="/cookies/new">Skapa ny kaka</a>
+
+<h2>Kakor</h2>
+<div class="cookie-main">
+  <% @cookies.each do |cookie| %>
+    <div class="cookie-item">
+      <a href="/cookies/<%= cookie["id"] %>">
+        <img class="cookie-image" src="/img/<%= cookie["image"] %>.png" alt="<%= cookie["flavor"] %>">
       </a>
 
-      <form action="/todos/<%= todo['id'] %>/down" method="post">
-        <button type="submit">Down</button>
-      </form>
+      <h3>
+        <a href="/cookies/<%= cookie["id"] %>"><%= cookie["flavor"] %></a>
+      </h3>
 
-      <form action="/todos/<%= todo['id'] %>/delete" method="post">
-        <button type="submit">Delete</button>
-      </form>
-
-      <form action="/todos/<%= todo['id'] %>/edit" method="get">
-        <button type="submit">Edit</button>
-      </form>
-    </li>
+      <span class="price"><%= cookie["price"] %>kr</span>
+      <p><%= cookie["beskrivning"] %></p>
+    </div>
   <% end %>
-</ul>
+</div>
 
 </body>
 </html>
